@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강대한 | 방폭·전기 엔지니어 포트폴리오 & 자기소개서</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font: Inter / Noto Sans KR -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0a0f1d',
+              card: '#131b2e',
+              border: '#1e293b',
+              accent: '#38bdf8',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              rose: '#ef4444',
+            }
+          },
+          fontFamily: {
+            sans: ['Noto Sans KR', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #070b14;
+      color: #e2e8f0;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+    .glow-accent {
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+    .glow-green {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    .glow-red {
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    }
+    .glow-amber {
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+    }
+    /* Signal Light Pulsing */
+    .signal-active {
+      animation: lightPulse 1.2s infinite alternate;
+    }
+    @keyframes lightPulse {
+      0% { opacity: 0.85; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-white">
+
+  <!-- TOP HEADER / NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-[#0a0f1d]/90 backdrop-blur-md border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand & Name -->
+        <div class="flex items-center space-x-3">
+          <div class="relative group">
+            <img src="images/profile-3d.jpg" alt="강대한 3D 아바타" class="w-11 h-11 rounded-xl object-cover object-top border border-sky-400/50 shadow-md group-hover:scale-105 transition-all">
+            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-900 flex items-center justify-center text-[8px] text-slate-950 font-bold">✓</div>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+              강대한 <span class="text-xs px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-400 font-normal border border-sky-500/30">방폭·전기 엔지니어</span>
+            </h1>
+            <p class="text-xs text-slate-400">인천폴리텍 하이테크 과정 | 전기기능사 · 전기공사산업기사 준비 및 PLC 제어전문</p>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Tabs -->
+        <nav class="hidden md:flex space-x-1">
+          <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1.5 text-sky-400 bg-sky-500/10 border border-sky-500/30">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>프로젝트 & 실습</span>
+          </button>
+          <button onclick="switchTab('cover-letter')" id="nav-cover-letter" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all duration-200 flex items-center gap-1.5">
+            <i class="fa-regular fa-file-lines"></i>
+            <span>자기소개서</span>
+          </button>
+        </nav>
+
+        <!-- Action / Contact Button -->
+        <div class="hidden sm:flex items-center gap-2">
+          <a href="tel:01000000000" class="px-3 py-1.5 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 transition-all">
+            <i class="fa-solid fa-phone text-sky-400"></i> 연락하기
+          </a>
+          <button onclick="window.print()" class="px-3 py-1.5 text-xs rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold flex items-center gap-1.5 transition-all">
+            <i class="fa-solid fa-print"></i> PDF/인쇄
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Bar -->
+    <div class="md:hidden flex border-t border-slate-800/60 bg-slate-900/90 text-xs overflow-x-auto custom-scrollbar">
+      <button onclick="switchTab('projects')" id="m-nav-projects" class="flex-1 min-w-[120px] py-2.5 text-center font-medium text-sky-400 border-b-2 border-sky-400">프로젝트 & 실습</button>
+      <button onclick="switchTab('cover-letter')" id="m-nav-cover-letter" class="flex-1 min-w-[120px] py-2.5 text-center font-medium text-slate-400">자기소개서</button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+    <!-- ========================================== -->
+    <!-- UNIFIED PROJECTS & HANDS-ON TAB            -->
+    <!-- ========================================== -->
+    <section id="tab-projects" class="tab-content space-y-12">
+      
+      <!-- HERO BANNER -->
+      <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-sky-950/40 border border-slate-800 rounded-2xl p-6 md:p-8 relative overflow-hidden">
+        <div class="absolute -right-12 -top-12 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-3xl">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2.5 py-1 rounded-md bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold uppercase tracking-wider">포트폴리오 핵심 실무</span>
+            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">PLC · 아두이노(AI) · 제어반 배관배선</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+            전기·제어 및 방폭 엔지니어링 실증 프로젝트
+          </h2>
+          <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+            인천폴리텍 전기공학과 하이테크 과정에서 직접 설계·시공·테스트한 **PLC 기반 신호등 시스템**, **AI 활용 아두이노 마이크로컨트롤러**, 그리고 **제어반 배관·배선 실습** 작품들을 사진 및 인터랙티브 제어기와 함께 확인하실 수 있습니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Sub-Navigation Anchor Buttons -->
+      <div class="flex flex-wrap gap-2 pt-2 border-b border-slate-800 pb-4">
+        <a href="#sub-plc" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-sky-400 border border-sky-500/30 text-xs font-bold flex items-center gap-2 transition-all">
+          <i class="fa-solid fa-traffic-light"></i> 1. PLC 4거리 신호등 프로젝트
+        </a>
+        <a href="#sub-arduino" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 text-xs font-bold flex items-center gap-2 transition-all">
+          <i class="fa-solid fa-microchip"></i> 2. 아두이노 & AI 마이크로컨트롤러
+        </a>
+        <a href="#sub-wiring" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 border border-amber-500/30 text-xs font-bold flex items-center gap-2 transition-all">
+          <i class="fa-solid fa-bolt"></i> 3. 제어반 배관 & 배선 시공 실습
+        </a>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SUB-SECTION 1: PLC TRAFFIC LIGHT PROJECT   -->
+      <!-- ========================================== -->
+      <div id="sub-plc" class="space-y-6 pt-4">
+        
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-traffic-light text-sky-400"></i> [프로젝트 1] PLC 기반 4거리 교차로 신호등 제어 시스템
+          </h3>
+          <span class="px-2.5 py-1 rounded-md bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-bold">LS XGB PLC + 24V SMPS</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- LEFT: 2 Project Photos Side-by-Side Card (7 Cols) -->
+          <div class="lg:col-span-7 space-y-4">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Photo 1: Upper Intersection Model -->
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 group hover:border-sky-500/50 transition-all flex flex-col justify-between">
+                <div class="aspect-[3/4] bg-slate-950 rounded-xl overflow-hidden relative mb-2 border border-slate-800 flex items-center justify-center">
+                  <img src="images/plc-intersection-model.jpg" alt="PLC 교차로 디오라마 모형" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-sky-950/40 p-4 text-center border border-sky-500/30 rounded-xl\'><i class=\'fa-solid fa-road text-3xl text-sky-400 mb-2\'></i><span class=\'text-xs font-bold text-white\'>[상부] 교차로 디오라마 모형</span></div>';">
+                </div>
+                <div>
+                  <span class="font-bold text-sky-400 text-xs block mb-1">[상부] 4거리 도로 디오라마</span>
+                  <p class="text-[11px] text-slate-400 leading-tight">신호등 타워 4기, 조경 모형, 수동 셀렉터 스위치 및 차량 디오라마 배치</p>
+                </div>
+              </div>
+
+              <!-- Photo 2: Lower Control Panel Wiring -->
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 group hover:border-emerald-500/50 transition-all flex flex-col justify-between">
+                <div class="aspect-[3/4] bg-slate-950 rounded-xl overflow-hidden relative mb-2 border border-slate-800 flex items-center justify-center">
+                  <img src="images/plc-control-panel.jpg" alt="PLC 제어반 배선판" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-emerald-950/40 p-4 text-center border border-emerald-500/30 rounded-xl\'><i class=\'fa-solid fa-gears text-3xl text-emerald-400 mb-2\'></i><span class=\'text-xs font-bold text-white\'>[하부] PLC 제어반 배선판</span></div>';">
+                </div>
+                <div>
+                  <span class="font-bold text-emerald-400 text-xs block mb-1">[하부] LS PLC 제어반 배선판</span>
+                  <p class="text-[11px] text-slate-400 leading-tight">LS XGB PLC, DC 24V SMPS, 차단기, 릴레이 모듈 및 단자대 직각 배선</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description Card -->
+            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-xs text-slate-300 leading-relaxed">
+              <span class="font-bold text-white block mb-1"><i class="fa-solid fa-circle-info text-sky-400 mr-1"></i> 프로젝트 핵심 설명</span>
+              디오라마 도로 구조물 구축부터 LS PLC XGB 시리즈 래더 프로그램 작성, 릴레이 접점을 이용한 하드웨어 이중 인터록 회로 적용까지 전 과정을 완료했습니다. 4개 방향 분구 단자대를 통해 하드웨어 정밀성과 정돈된 타이랩 바인딩을 달성했습니다.
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Live Interactive PLC Traffic Simulator (5 Cols) -->
+          <div class="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800">
+                <h4 class="text-sm font-bold text-white flex items-center gap-1.5">
+                  <i class="fa-solid fa-desktop text-sky-400"></i> 실시간 PLC 신호등 시뮬레이터
+                </h4>
+                <span id="timer-countdown" class="px-2 py-0.5 rounded-full text-[11px] font-mono font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                  05s
+                </span>
+              </div>
+
+              <!-- Current Status Display -->
+              <div class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl mb-4 text-center">
+                <span class="text-[10px] text-slate-400 block mb-0.5">PLC 순차 로직 상태</span>
+                <span id="current-phase-text" class="text-xs font-extrabold text-emerald-400">남북(N-S) 직진 신호</span>
+              </div>
+
+              <!-- 3D Intersection (three.js) -->
+              <div id="sim3d-wrap" class="relative w-full aspect-square bg-slate-950 rounded-xl border border-slate-800 overflow-hidden">
+                <canvas id="sim3d-canvas" class="w-full h-full block touch-none" style="cursor:grab"></canvas>
+                <div id="sim3d-fallback" class="hidden absolute inset-0 flex items-center justify-center text-xs text-slate-400 p-6 text-center"></div>
+                <div class="absolute top-2 right-2 flex gap-1.5">
+                  <button id="sim3d-top" type="button" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-900/85 text-sky-300 border border-sky-500/40 hover:bg-slate-800">탑뷰</button>
+                  <button id="sim3d-reset" type="button" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-900/85 text-sky-300 border border-sky-500/40 hover:bg-slate-800">기본 시점</button>
+                </div>
+                <div class="absolute bottom-2 left-2 px-2 py-1 rounded-md text-[10px] text-slate-300 bg-slate-900/80 border border-slate-700 pointer-events-none">
+                  <i class="fa-solid fa-arrows-rotate mr-1 text-sky-400"></i>드래그: 회전 · 휠: 확대/축소
+                </div>
+              </div>
+            </div>
+
+            <!-- Mode Controls -->
+            <div class="mt-4 pt-3 border-t border-slate-800">
+              <div class="grid grid-cols-3 gap-1.5">
+                <button onclick="setSimMode('auto')" class="py-1.5 px-2 rounded-lg text-[11px] font-bold bg-sky-500 text-slate-950 border border-sky-400 hover:bg-sky-400 shadow">자동 순환</button>
+                <button onclick="setSimMode('pedestrian')" class="py-1.5 px-2 rounded-lg text-[11px] font-bold bg-emerald-500 text-slate-950 border border-emerald-400 hover:bg-emerald-400 shadow">보행자 수동</button>
+                <button onclick="setSimMode('emergency')" class="py-1.5 px-2 rounded-lg text-[11px] font-bold bg-amber-500 text-slate-950 border border-amber-400 hover:bg-amber-400 shadow">비상 점멸</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SUB-SECTION 2: ARDUINO & AI MICROCONTROLLER-->
+      <!-- ========================================== -->
+      <div id="sub-arduino" class="space-y-6 pt-6 border-t border-slate-800">
+        
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-microchip text-emerald-400"></i> [프로젝트 2] AI 활용 아두이노 마이크로컨트롤러 & 기초 전자기학
+          </h3>
+          <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">Arduino Uno + Breadboard + AI Coding</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- LEFT: Interactive Arduino GPIO Board Simulator (7 Cols) -->
+          <div class="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  <i class="fa-solid fa-bolt text-emerald-400"></i> 아두이노 GPIO & 브레드보드 실시간 시뮬레이터
+                </h4>
+                <span id="ard-sim-status" class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  VCC 5V Ready
+                </span>
+              </div>
+
+              <!-- LEDs Grid & Buzzer/Switch Widgets -->
+              <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 my-2 space-y-4">
+                
+                <!-- 5 Color LEDs -->
+                <div>
+                  <span class="text-[11px] font-bold text-slate-400 block mb-2"><i class="fa-solid fa-lightbulb text-amber-400 mr-1"></i> 5색 LED 디지털 출력 (Pin D2 ~ D6)</span>
+                  <div class="grid grid-cols-5 gap-2 text-center">
+                    <div class="p-2 bg-slate-900 rounded-lg border border-slate-800 flex flex-col items-center gap-1">
+                      <span class="text-[9px] text-slate-400 font-mono">D2 (RED)</span>
+                      <div id="ard-led-red" class="w-5 h-5 rounded-full bg-slate-800 border border-slate-700"></div>
+                    </div>
+                    <div class="p-2 bg-slate-900 rounded-lg border border-slate-800 flex flex-col items-center gap-1">
+                      <span class="text-[9px] text-slate-400 font-mono">D3 (CYAN)</span>
+                      <div id="ard-led-cyan" class="w-5 h-5 rounded-full bg-slate-800 border border-slate-700"></div>
+                    </div>
+                    <div class="p-2 bg-slate-900 rounded-lg border border-slate-800 flex flex-col items-center gap-1">
+                      <span class="text-[9px] text-slate-400 font-mono">D4 (GREEN)</span>
+                      <div id="ard-led-green" class="w-5 h-5 rounded-full bg-slate-800 border border-slate-700"></div>
+                    </div>
+                    <div class="p-2 bg-slate-900 rounded-lg border border-slate-800 flex flex-col items-center gap-1">
+                      <span class="text-[9px] text-slate-400 font-mono">D5 (BLUE)</span>
+                      <div id="ard-led-blue" class="w-5 h-5 rounded-full bg-slate-800 border border-slate-700"></div>
+                    </div>
+                    <div class="p-2 bg-slate-900 rounded-lg border border-slate-800 flex flex-col items-center gap-1">
+                      <span class="text-[9px] text-slate-400 font-mono">D6 (YELLOW)</span>
+                      <div id="ard-led-yellow" class="w-5 h-5 rounded-full bg-slate-800 border border-slate-700"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Buzzer & Button Row -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800 flex items-center justify-between text-xs">
+                    <div>
+                      <span class="text-[10px] text-slate-400 font-bold block">피에조 버저 (D8 PWM)</span>
+                      <span id="ard-buzzer-text" class="text-[10px] text-slate-500 font-mono">Mute (0Hz)</span>
+                    </div>
+                    <div id="ard-buzzer-icon" class="w-8 h-8 rounded-full bg-slate-800 text-slate-600 flex items-center justify-center">
+                      <i class="fa-solid fa-volume-xmark"></i>
+                    </div>
+                  </div>
+
+                  <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800 flex items-center justify-between text-xs">
+                    <div>
+                      <span class="text-[10px] text-slate-400 font-bold block">푸시 스위치 (D7 Pull-up)</span>
+                      <span id="ard-button-text" class="text-[10px] text-slate-400 font-mono">HIGH</span>
+                    </div>
+                    <button onmousedown="pressArduinoButton(true)" onmouseup="pressArduinoButton(false)" onmouseleave="pressArduinoButton(false)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-400 flex items-center justify-center border border-slate-700 active:scale-95 transition-all">
+                      <i class="fa-solid fa-fingerprint"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Serial Monitor -->
+                <div class="bg-slate-900 p-2 rounded-lg border border-slate-800 font-mono text-[10px]">
+                  <p id="ard-serial-log" class="text-emerald-300 h-8 overflow-y-auto custom-scrollbar leading-tight">
+                    > System Initialized.<br>> AI C++ Code Ready.
+                  </p>
+                </div>
+
+              </div>
+
+              <!-- Simulator Trigger Buttons -->
+              <div class="grid grid-cols-3 gap-2 mt-2">
+                <button onclick="triggerArdPattern('seq')" class="py-1.5 px-2 rounded-lg text-[11px] font-bold bg-emerald-500 text-slate-950 border border-emerald-400 hover:bg-emerald-400 shadow">LED 순차 점등</button>
+                <button onclick="triggerArdPattern('melody')" class="py-1.5 px-2 rounded-lg text-[11px] font-bold bg-sky-500 text-slate-950 border border-sky-400 hover:bg-sky-400 shadow">버저 멜로디</button>
+                <button onclick="triggerArdPattern('all')" class="py-1.5 px-2 rounded-lg text-[11px] font-bold bg-amber-500 text-slate-950 border border-amber-400 hover:bg-amber-400 shadow">전체 동작 테스트</button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- RIGHT: 2 Photos Side-by-Side Card (5 Cols) -->
+          <div class="lg:col-span-5 space-y-4">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Photo 1: Arduino Front View -->
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 group hover:border-emerald-500/50 transition-all flex flex-col justify-between">
+                <div class="aspect-[3/4] bg-slate-950 rounded-xl overflow-hidden relative mb-2 border border-slate-800 flex items-center justify-center">
+                  <img src="images/arduino-circuit-front.jpg" alt="아두이노 UNO 회로 전면 배선" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-emerald-950/40 p-4 text-center border border-emerald-500/30 rounded-xl\'><i class=\'fa-solid fa-microchip text-3xl text-emerald-400 mb-2\'></i><span class=\'text-xs font-bold text-white\'>회로 전면 배선</span></div>';">
+                </div>
+                <div>
+                  <span class="font-bold text-emerald-400 text-xs block mb-1">회로 전면 배선 사진</span>
+                  <p class="text-[11px] text-slate-400 leading-tight">Arduino Uno R3 + Breadboard + 5색 LED 및 전류 제한 저항 결선</p>
+                </div>
+              </div>
+
+              <!-- Photo 2: Buzzer & Switch Side View -->
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 group hover:border-sky-500/50 transition-all flex flex-col justify-between">
+                <div class="aspect-[3/4] bg-slate-950 rounded-xl overflow-hidden relative mb-2 border border-slate-800 flex items-center justify-center">
+                  <img src="images/arduino-buzzer-switch.jpg" alt="피에조 버저 및 스위치" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-sky-950/40 p-4 text-center border border-sky-500/30 rounded-xl\'><i class=\'fa-solid fa-volume-high text-3xl text-sky-400 mb-2\'></i><span class=\'text-xs font-bold text-white\'>버저 & 스위치 회로</span></div>';">
+                </div>
+                <div>
+                  <span class="font-bold text-sky-400 text-xs block mb-1">버저 & 스위치 측면 사진</span>
+                  <p class="text-[11px] text-slate-400 leading-tight">피에조 버저 PWM 음계 제어 및 풀업 저항 채터링 방지 회로</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description Card -->
+            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-xs text-slate-300 leading-relaxed">
+              <span class="font-bold text-white block mb-1"><i class="fa-solid fa-brain text-emerald-400 mr-1"></i> AI 코딩 & 기초 전자기학 실증</span>
+              ChatGPT/Gemini 프롬프팅을 활용해 C/C++ 스케치 코드를 구성하였으며, 옴의 법칙($V=IR$)에 기초한 220Ω 저항 계산 및 스위치 풀업/풀다운 회로 구성을 통해 임베디드 현장계장 기술 기초를 다졌습니다.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ========================================== -->
+      <!-- SUB-SECTION 3: WIRING & PIPING PRACTICAL   -->
+      <!-- ========================================== -->
+      <div id="sub-wiring" class="space-y-6 pt-6 border-t border-slate-800">
+        
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-amber-400"></i> [실습 3] 제어반 배관 및 배선 공사 실무 역량
+          </h3>
+          <span class="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold">전기기능사 및 방폭 계장 작업</span>
+        </div>
+
+        <!-- Photo: Conduit & Wiring Practice -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 grid grid-cols-1 md:grid-cols-12 gap-6 items-center group hover:border-amber-500/50 transition-all">
+          <div class="md:col-span-5 lg:col-span-4">
+            <div class="aspect-[3/4] bg-slate-950 rounded-xl overflow-hidden border border-slate-800">
+              <img src="images/conduit-wiring-practice.jpg" alt="제어반 배관 및 배선 실습 완성 작품" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+          </div>
+          <div class="md:col-span-7 lg:col-span-8 space-y-3">
+            <span class="font-bold text-amber-400 text-sm block"><i class="fa-solid fa-camera mr-1.5"></i>제어반 배관 &amp; 배선 시공 완성 사진</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              합판 실습판 위에 CD관·PE관 배관, 스위치 박스, 푸시버튼 박스, 단자대, 그리고 타이머·릴레이·MC가 실장된 제어반을 직접 시공하고 점등 테스트까지 완료한 작품입니다.
+            </p>
+            <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+              <li><i class="fa-solid fa-check text-amber-400 mr-1.5"></i>새들로 일정하게 고정한 곡선 배관 및 박스 커넥터 체결</li>
+              <li><i class="fa-solid fa-check text-amber-400 mr-1.5"></i>제어반 내 황색 보조회로 전선의 정돈된 배선 및 단자대 결선</li>
+              <li><i class="fa-solid fa-check text-amber-400 mr-1.5"></i>회로 동작 시험 후 램프 점등 확인</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Card 1: Control Panel Wiring -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-400 flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-diagram-project"></i>
+              </div>
+              <h4 class="text-base font-bold text-white mb-2">제어반 직각 배선 & 단자 체결</h4>
+              <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                주회로(흑, 적, 청, 녹) 및 보조회로(황) 전선의 단자대/계전기 연결 시, 들뜸 현상 없이 완벽한 직각 곡주와 정갈한 바인딩을 적용합니다.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+                <li><i class="fa-solid fa-check text-sky-400 mr-1.5"></i>MC, Relay, Timer 피치 피복 박리</li>
+                <li><i class="fa-solid fa-check text-sky-400 mr-1.5"></i>단자 체결 토크 준수로 접촉 불량 예방</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+              <span>완성도</span>
+              <span class="text-sky-400 font-bold">Zero Faults (오배선 0건)</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Pipe Bending -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-ruler-combined"></i>
+              </div>
+              <h4 class="text-base font-bold text-white mb-2">관로 공사 (PE관, CD관, 커넥터)</h4>
+              <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                제어판 외부 배관 시 스프링 벤더를 활용한 미려한 곡률 유지, 규격 치수 이내의 새들 고정 및 스위치 박스 정확한 위치 설치를 진행합니다.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+                <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i>수평/수직 새들 간격 균일 배치</li>
+                <li><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i>커넥터 완착으로 피복 손상 방지</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+              <span>치수 오차</span>
+              <span class="text-emerald-400 font-bold">±2mm 이내 엄수</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Explosion Proof Standard -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-lg mb-4">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <h4 class="text-base font-bold text-white mb-2">방폭(Ex) 설비 및 안전 기선 이해</h4>
+              <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                내압방폭(Ex d), 본질안전방폭(Ex i), 안전증방폭(Ex e) 등 위험지역(Zone 0, 1, 2)에 따른 방폭 구조 및 케이블 글랜드(Cable Gland) 체결 지식을 보유하고 있습니다.
+              </p>
+              <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">
+                <li><i class="fa-solid fa-check text-amber-400 mr-1.5"></i>IECEx / ATEX 방폭 기준 이해</li>
+                <li><i class="fa-solid fa-check text-amber-400 mr-1.5"></i>가스·화학 플랜트 전기계장 특성 체득</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+              <span>지향 분야</span>
+              <span class="text-amber-400 font-bold">방폭 진단 & 전기 계장</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: COVER LETTER & RESUME (자기소개서) -->
+    <!-- ========================================== -->
+    <section id="tab-cover-letter" class="tab-content hidden space-y-8">
+      
+      <!-- Resume Profile & Header Banner -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
+        
+        <!-- Profile Photos (3D Avatar + Real Studio Photo) -->
+        <div class="flex items-center gap-4 shrink-0">
+          <!-- 3D Character Photo -->
+          <div class="flex flex-col items-center">
+            <div class="w-28 h-36 rounded-xl bg-slate-950 border-2 border-sky-500/40 overflow-hidden shadow-lg relative group flex items-center justify-center">
+              <img src="images/profile-3d.jpg" alt="3D 정장 아바타" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-sky-950/50 p-2 text-center\'><i class=\'fa-solid fa-user-tie text-3xl text-sky-400 mb-1\'></i><span class=\'text-[10px] text-sky-300 font-bold\'>3D Profile</span></div>';">
+              <span class="absolute bottom-1 right-1 bg-sky-500/90 text-slate-950 text-[9px] font-extrabold px-1.5 py-0.5 rounded">3D Profile</span>
+            </div>
+            <span class="text-[10px] text-slate-400 mt-1">3D 정장 캐릭터</span>
+          </div>
+
+          <!-- Real Photo (Polished / Corrected view) -->
+          <div class="flex flex-col items-center">
+            <div class="w-28 h-36 rounded-xl bg-slate-950 border-2 border-emerald-500/40 overflow-hidden shadow-lg relative group flex items-center justify-center">
+              <img src="images/profile-photo.jpg" alt="강대한 실사 증명사진" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-emerald-950/50 p-2 text-center\'><i class=\'fa-solid fa-id-card text-3xl text-emerald-400 mb-1\'></i><span class=\'text-[10px] text-emerald-300 font-bold\'>Real Photo</span></div>';">
+              <span class="absolute bottom-1 right-1 bg-emerald-500/90 text-slate-950 text-[9px] font-extrabold px-1.5 py-0.5 rounded">Real Photo</span>
+            </div>
+            <span class="text-[10px] text-slate-400 mt-1">실사 보정 프로필</span>
+          </div>
+        </div>
+
+        <div class="flex-grow text-center md:text-left">
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-1">
+            <span class="px-2.5 py-1 rounded-md bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold">입사지원서 표준 서식</span>
+            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">복장/얼굴 톤 정밀 보정 완료</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white mt-1">강대한 (Kang Dae-han) 지원자 프로필</h2>
+          <p class="text-xs text-slate-300 mt-1">인천폴리텍대학교 전기공학과 하이테크 과정 | 방폭 전기 엔지니어 지망</p>
+          <div class="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs text-slate-400">
+            <span><i class="fa-solid fa-graduation-cap text-sky-400 mr-1"></i> 인천폴리텍 전기공학과</span>
+            <span><i class="fa-solid fa-certificate text-emerald-400 mr-1"></i> 전기기능사 실기 준비</span>
+            <span><i class="fa-solid fa-certificate text-sky-400 mr-1"></i> 전기공사산업기사 준비 중</span>
+            <span><i class="fa-solid fa-video text-amber-400 mr-1"></i> 롤 크리에이터 10년</span>
+          </div>
+        </div>
+
+        <div class="shrink-0">
+          <button onclick="copyCoverLetterText()" class="px-4 py-2.5 bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg transition-all">
+            <i class="fa-regular fa-copy"></i> 자소서 전문 복사
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Question 1 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs font-bold border border-sky-500/30">1</span>
+          <h3 class="text-base font-bold text-white">지원 동기 및 포부</h3>
+        </div>
+        <blockquote class="border-l-2 border-sky-500 pl-4 py-1 text-xs font-semibold text-sky-300 mb-4 bg-sky-500/5 rounded-r">
+          "10년의 콘텐츠 크리에이티브에서, 100년의 기술 전문성을 갖춘 방폭 전기 엔지니어로"
+        </blockquote>
+        <div class="text-xs text-slate-300 leading-relaxed space-y-3">
+          <p>
+            10년간 롤(LoL) 전문 유튜버로 활동하며 급변하는 미디어 환경 속에서 콘텐츠를 기획하고 대중과 소통해 왔습니다. 하지만 AI 시대의 도래와 함께 대체 불가능한 '나만의 확실한 기술 전문성'을 갖추고자 고민했고, 산업 현장의 핵심이자 인프라의 근간인 '전기' 분야로 도전하게 되었습니다.
+          </p>
+          <p>
+            체계적인 전기 기술 습득을 위해 **인천폴리텍대학교 전기공학과 하이테크 과정**에 입학하였으며, 기초 이론부터 제어반 배선, 시퀀스 제어 실습, PLC 프로그래밍까지 이수하고 있습니다. 특히 가스·화학 및 정유 공장 등 위협 요소가 상존하는 특수 현장에서 필수적인 **방폭(Explosion-Proof) 전기 설비 및 전기계장 엔지니어링** 분야에 깊은 매력을 느꼈습니다.
+          </p>
+          <p>
+            향후 방폭 구조 검사, 안전 진단, 시험·인증 기술서 작성 지원 등 현장의 안전을 책임지는 최고의 방폭 엔지니어로 성장하겠습니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold border border-emerald-500/30">2</span>
+          <h3 class="text-base font-bold text-white">직무 관련 핵심 역량 및 실습 성과</h3>
+        </div>
+        <blockquote class="border-l-2 border-emerald-500 pl-4 py-1 text-xs font-semibold text-emerald-300 mb-4 bg-emerald-500/5 rounded-r">
+          "이론을 도면으로, 도면을 정교한 시퀀스·PLC 제어반 및 AI 기반 임베디드 회로로 구현하는 능력"
+        </blockquote>
+        <div class="text-xs text-slate-300 leading-relaxed space-y-3">
+          <p>
+            인천폴리텍 하이테크 과정에서 단순 이론 습득에 그치지 않고, 수많은 배관 및 제어반 배선 실습, **PLC 기반 4거리 교차로 신호등 제작 프로젝트**, 그리고 **AI 도구를 활용한 아두이노 마이크로컨트롤러 실습**을 완수했습니다.
+          </p>
+          <ul class="list-disc pl-5 space-y-1 text-slate-300">
+            <li><strong>도면 해석 및 정교한 배선 시공 능력:</strong> 주회로 및 보조회로 도면을 정확히 이해하고, 단자대 연결부터 전선 정리까지 규격에 맞춰 정갈하게 시공하는 감각을 익혔습니다.</li>
+            <li><strong>PLC 제어 및 로직 구현 능력:</strong> LS PLC 제어반 배선 및 래더 프로그램 입출력 인터록 설계를 진행하며 트러블슈팅 역량을 증명했습니다.</li>
+            <li><strong>AI 활용 아두이노 임베디드 실습:</strong> ChatGPT/Gemini 프롬프팅으로 C/C++ 스케치 코드를 구성하고, 브레드보드 상에서 옴의 법칙(전류 제한 저항), 스위치 풀업/풀다운 및 피에조 버저 PWM 신호를 다루며 전기·전자 기초 메커니즘을 확실히 체득했습니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-bold border border-amber-500/30">3</span>
+          <h3 class="text-base font-bold text-white">핵심 강점 및 성장 경험 (STAR)</h3>
+        </div>
+        <blockquote class="border-l-2 border-amber-500 pl-4 py-1 text-xs font-semibold text-amber-300 mb-4 bg-amber-500/5 rounded-r">
+          "10년 간 축적된 문제 해결 능력과 끈기"
+        </blockquote>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+            <span class="font-bold text-amber-400 block mb-1">Situation (상황)</span>
+            <p class="text-slate-400">10년간 유튜버로 활동하며 채널을 운영하는 과정은 매일 새로운 알고리즘과 대중의 피드백 속에서 끊임없이 문제를 해결해야 하는 도전이었습니다.</p>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+            <span class="font-bold text-amber-400 block mb-1">Task (과제)</span>
+            <p class="text-slate-400">1인 크리에이터로서 기획, 촬영, 편집, 분석, 위기 대응까지 전 과정을 혼자 책임지며 성과를 만들어내야 했습니다.</p>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+            <span class="font-bold text-amber-400 block mb-1">Action (실행)</span>
+            <p class="text-slate-400">트렌드 변화에 유연하게 대응하면서도, 매일 일정 분량의 작업을 완성해 내는 철저한 루틴과 집념을 유지했습니다.</p>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+            <span class="font-bold text-sky-400 block mb-1">Result (성과)</span>
+            <p class="text-slate-400">10년이라는 긴 시간 동안 단절 없이 채널을 이끌어왔으며, 이 과정에서 **'높은 몰입도', '문제 원인 파악 능력', '끝까지 완수하는 책임감'**을 얻었습니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 4: Career History -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold border border-rose-500/30">4</span>
+          <h3 class="text-base font-bold text-white">학력 및 주요 연혁</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left text-slate-300">
+            <thead class="text-slate-400 bg-slate-950 border-b border-slate-800">
+              <tr>
+                <th class="py-2.5 px-3">기간</th>
+                <th class="py-2.5 px-3">기관 / 구분</th>
+                <th class="py-2.5 px-3">내용 및 성과</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800">
+              <tr>
+                <td class="py-3 px-3 font-mono text-sky-400">2026.03 ~ 현재</td>
+                <td class="py-3 px-3 font-semibold text-white">인천폴리텍대학교</td>
+                <td class="py-3 px-3">전기공학과 하이테크 과정 재학 (시퀀스, PLC, 방폭공학 이수)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-mono text-emerald-400">2026.11.27 (예정)</td>
+                <td class="py-3 px-3 font-semibold text-white">한국산업인력공단</td>
+                <td class="py-3 px-3">전기기능사 실기 시험 응시 예정</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-mono text-sky-400">2026.12.04 (예정)</td>
+                <td class="py-3 px-3 font-semibold text-white">한국산업인력공단</td>
+                <td class="py-3 px-3">전기공사산업기사 과정평가형 작업형 응시 예정 (필기형 12.03)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-mono text-slate-400">2016 ~ 2026</td>
+                <td class="py-3 px-3 font-semibold text-white">콘텐츠 크리에이터</td>
+                <td class="py-3 px-3">롤 유튜버 10년 활동 (1인 기획, 분석, 장기 프로젝트 완수)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#070b14] border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <p>© 2026 강대한 (Kang Dae-han). All rights reserved.</p>
+      <p class="text-slate-600">인천폴리텍 전기공학과 | 방폭 엔지니어 포트폴리오</p>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATION BOX -->
+  <div id="toast-msg" class="fixed bottom-5 right-5 px-4 py-2.5 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs shadow-2xl transition-all duration-300 transform translate-y-16 opacity-0 pointer-events-none z-50 flex items-center gap-2">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-text">복사되었습니다!</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+// ==========================================
+// 3D PLC TRAFFIC LIGHT SIMULATOR (three.js)
+// ==========================================
+(function () {
+  var canvas = document.getElementById('sim3d-canvas');
+  var wrap = document.getElementById('sim3d-wrap');
+  var fb = document.getElementById('sim3d-fallback');
+  if (!canvas || !wrap) return;
+  function fail(msg) { if (fb) { fb.textContent = msg; fb.classList.remove('hidden'); } }
+  if (typeof THREE === 'undefined') { fail('3D 라이브러리(three.js)를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.'); return; }
+
+  var renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+  } catch (e) { fail('이 브라우저에서는 WebGL을 사용할 수 없습니다.'); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0a0f1d);
+  var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
+
+  // ---------- lights ----------
+  scene.add(new THREE.HemisphereLight(0xcfe3ff, 0x1b2438, 0.75));
+  var sun = new THREE.DirectionalLight(0xffffff, 0.85);
+  sun.position.set(-12, 22, 10);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(1024, 1024);
+  var sc = sun.shadow.camera; sc.left = -18; sc.right = 18; sc.top = 18; sc.bottom = -18; sc.near = 1; sc.far = 60;
+  scene.add(sun);
+
+  function box(w, h, d, color, x, y, z, opts) {
+    var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d),
+      new THREE.MeshStandardMaterial(Object.assign({ color: color, roughness: 0.85, metalness: 0.0 }, opts || {})));
+    m.position.set(x, y, z); m.receiveShadow = true; m.castShadow = false;
+    scene.add(m); return m;
+  }
+
+  // ---------- board / roads ----------
+  box(28, 0.6, 28, 0x1e293b, 0, -0.3, 0);                 // base board
+  [[1, 1], [1, -1], [-1, 1], [-1, -1]].forEach(function (s) {    // sidewalks (white board)
+    box(11.5, 0.16, 11.5, 0xe8edf3, s[0] * 7.75, 0.08, s[1] * 7.75);
+  });
+  box(28, 0.1, 4, 0x151b27, 0, 0.05, 0);                   // road E-W
+  box(4, 0.1, 28, 0x151b27, 0, 0.05, 0);                   // road N-S
+  box(4, 0.11, 4, 0x1a2231, 0, 0.055, 0);                  // intersection
+
+  var white = 0xf1f5f9;
+  for (var d = 3.2; d < 13.5; d += 1.7) {                  // dashed center lines
+    [1, -1].forEach(function (s) {
+      box(0.14, 0.02, 0.9, white, 0, 0.115, s * d);
+      box(0.9, 0.02, 0.14, white, s * d, 0.115, 0);
+    });
+  }
+  // stop lines + crosswalks
+  [[1, 1, 'z'], [-1, -1, 'z'], [1, -1, 'x'], [-1, 1, 'x']].forEach(function (c) {
+    var sx = c[0], sz = c[1];
+    if (c[2] === 'z') {
+      var side = sx; // +1 : approach from south (z>0) on x=+1 ; -1 : from north on x=-1
+      box(1.9, 0.02, 0.22, white, side * 1, 0.115, side * 2.6);
+      for (var i = -2; i <= 2; i++) box(0.55, 0.02, 1.0, white, i * 0.78, 0.115, side * 3.6);
+    } else {
+      var sd = sz; // -1 : from east (x>0) lane z=-1 ; +1 : from west lane z=+1
+      box(0.22, 0.02, 1.9, white, -sd * 2.6, 0.115, sd * 1);
+      for (var j = -2; j <= 2; j++) box(1.0, 0.02, 0.55, white, -sd * 3.6, 0.115, j * 0.78);
+    }
+  });
+
+  // ---------- trees / bushes ----------
+  function tree(x, z, h) {
+    var g = new THREE.Group();
+    var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 0.4, 6), new THREE.MeshStandardMaterial({ color: 0x5b3a1e }));
+    trunk.position.y = 0.2; g.add(trunk);
+    var cone = new THREE.Mesh(new THREE.ConeGeometry(0.42, h, 8), new THREE.MeshStandardMaterial({ color: 0x2f7d3a, roughness: 0.9 }));
+    cone.position.y = 0.4 + h / 2; cone.castShadow = true; g.add(cone);
+    g.position.set(x, 0.16, z); scene.add(g);
+  }
+  [[6, 6, 2.2], [9, 4.5, 1.8], [5, 10, 2], [-6, 6.5, 2.4], [-9.5, 9, 1.8], [-5, -7, 2.1], [-10, -5, 2.3], [7, -7, 2], [10.5, -10, 1.7], [4.5, -11, 2.2], [-8, 11, 1.6], [11, 9, 2]]
+    .forEach(function (t) { tree(t[0], t[1], t[2]); });
+  [[-6.5, 4], [6.5, -4.5], [8, 7.5], [-8, -9]].forEach(function (b) {
+    var m = new THREE.Mesh(new THREE.SphereGeometry(0.42, 10, 8), new THREE.MeshStandardMaterial({ color: 0x8fbf2a, roughness: 0.9 }));
+    m.position.set(b[0], 0.45, b[1]); m.scale.y = 0.7; m.castShadow = true; scene.add(m);
+  });
+
+  // ---------- labels ----------
+  function label(text, x, z) {
+    var c = document.createElement('canvas'); c.width = 128; c.height = 64;
+    var g = c.getContext('2d');
+    g.fillStyle = 'rgba(15,23,42,0.85)'; g.fillRect(0, 0, 128, 64);
+    g.strokeStyle = '#38bdf8'; g.lineWidth = 3; g.strokeRect(2, 2, 124, 60);
+    g.fillStyle = '#e2e8f0'; g.font = 'bold 34px sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText(text, 64, 34);
+    var s = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), transparent: true }));
+    s.scale.set(3, 1.5, 1); s.position.set(x, 0.9, z); scene.add(s);
+  }
+  label('NORTH', 0, -12.6); label('SOUTH', 0, 12.6); label('WEST', -12.2, 0); label('EAST', 12.2, 0);
+
+  // ---------- signal towers (LED tower light on a pole, like the real model) ----------
+  var glowTex = (function () {
+    var c = document.createElement('canvas'); c.width = c.height = 64;
+    var g = c.getContext('2d'); var gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.35, 'rgba(255,255,255,0.45)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c);
+  })();
+  var COLORS = {
+    red:    { off: 0x4a1616, on: 0xff3b3b },
+    yellow: { off: 0x4a3c12, on: 0xffc21a },
+    green:  { off: 0x123f29, on: 0x2cff8a }
+  };
+  var silver = new THREE.MeshStandardMaterial({ color: 0xaab4c2, metalness: 0.7, roughness: 0.35 });
+  var lamps = {};                      // lamps[dir][color] = {mat, glow}
+  var state = { n: null, s: null, e: null, w: null };
+
+  function makeTower(dir, px, pz, cx, cz, axis) {
+    var H = 3.2;
+    var pole = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, H, 10), silver);
+    pole.position.set(px, 0.16 + H / 2, pz); pole.castShadow = true; scene.add(pole);
+    var foot = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.3, 0.1, 12), silver);
+    foot.position.set(px, 0.21, pz); scene.add(foot);
+
+    var g = new THREE.Group();
+    g.position.set(cx, 0.16 + H, cz);
+    if (axis === 'x') g.rotation.z = Math.PI / 2; else g.rotation.x = Math.PI / 2;
+    var housing = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 1.95, 16), silver);
+    housing.castShadow = true; g.add(housing);
+    [-1, 1].forEach(function (s) {
+      var cap = new THREE.Mesh(new THREE.CylinderGeometry(0.31, 0.31, 0.14, 16), new THREE.MeshStandardMaterial({ color: 0xcfd6df, roughness: 0.5 }));
+      cap.position.y = s * 1.0; g.add(cap);
+    });
+    lamps[dir] = {};
+    ['red', 'yellow', 'green'].forEach(function (col, i) {
+      var mat = new THREE.MeshStandardMaterial({ color: COLORS[col].off, emissive: COLORS[col].on, emissiveIntensity: 0, roughness: 0.4, transparent: true, opacity: 0.95 });
+      var lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.5, 20), mat);
+      lamp.position.y = (i - 1) * 0.62; g.add(lamp);
+      var glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: COLORS[col].on, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0 }));
+      glow.scale.set(2.2, 2.2, 1);
+      // glow sprites live in world space so group rotation does not matter
+      var wp = new THREE.Vector3(); scene.add(glow);
+      lamps[dir][col] = { mat: mat, glow: glow, lamp: lamp, g: g };
+    });
+    scene.add(g);
+    g.updateMatrixWorld(true);
+    ['red', 'yellow', 'green'].forEach(function (col) {
+      var L = lamps[dir][col]; var p = new THREE.Vector3(); L.lamp.getWorldPosition(p); L.glow.position.copy(p);
+    });
+    // arm from pole to tower
+    var ax = Math.abs(cx - px), az = Math.abs(cz - pz);
+    var arm = new THREE.Mesh(new THREE.BoxGeometry(axis === 'x' ? ax : 0.1, 0.1, axis === 'z' ? az : 0.1), silver);
+    arm.position.set((px + cx) / 2, 0.16 + H, (pz + cz) / 2); scene.add(arm);
+  }
+  makeTower('s',  3.2,  3.2,  1.45,  3.2, 'x');
+  makeTower('n', -3.2, -3.2, -1.45, -3.2, 'x');
+  makeTower('e',  3.2, -3.2,  3.2, -1.45, 'z');
+  makeTower('w', -3.2,  3.2, -3.2,  1.45, 'z');
+
+  // ---------- cars ----------
+  var HEAD = { s: Math.PI, n: 0, e: -Math.PI / 2, w: Math.PI / 2 };
+  function carPos(a, pos) {
+    if (a === 's') return [1, pos];
+    if (a === 'n') return [-1, -pos];
+    if (a === 'e') return [pos, -1];
+    return [-pos, 1];
+  }
+  function makeCar(color) {
+    var g = new THREE.Group();
+    var body = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.42, 1.6), new THREE.MeshStandardMaterial({ color: color, roughness: 0.5, metalness: 0.2 }));
+    body.position.y = 0.4; body.castShadow = true; g.add(body);
+    var cab = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.34, 0.8), new THREE.MeshStandardMaterial({ color: 0xcfe8ff, roughness: 0.2, metalness: 0.4 }));
+    cab.position.set(0, 0.76, -0.1); cab.castShadow = true; g.add(cab);
+    var wm = new THREE.MeshStandardMaterial({ color: 0x0b0b0b });
+    [[-0.45, 0.5], [0.45, 0.5], [-0.45, -0.5], [0.45, -0.5]].forEach(function (w) {
+      var wh = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.14, 12), wm);
+      wh.rotation.z = Math.PI / 2; wh.position.set(w[0], 0.22, w[1]); g.add(wh);
+    });
+    var hl = new THREE.MeshStandardMaterial({ color: 0xfff3c0, emissive: 0xfff3c0, emissiveIntensity: 0.8 });
+    [-0.28, 0.28].forEach(function (x) { var l = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.1, 0.05), hl); l.position.set(x, 0.42, 0.82); g.add(l); });
+    return g;
+  }
+  var carColors = [0xff7a1a, 0xe23a3a, 0x3b82f6, 0xf5c542, 0x9b5de5, 0x2dd4bf, 0xf472b6, 0xa3e635];
+  var lanes = {};
+  var ci = 0;
+  ['s', 'n', 'e', 'w'].forEach(function (a) {
+    lanes[a] = [];
+    for (var i = 0; i < 3; i++) {
+      var m = makeCar(carColors[ci++ % carColors.length]);
+      scene.add(m);
+      lanes[a].push({ mesh: m, pos: 13 - i * 4.8 + (a === 'e' || a === 'w' ? 2.2 : 0), v: 0 });
+    }
+  });
+
+  var HOLD = 3.6, GAP = 2.3, VMAX = 4.2;
+  function stepCars(dt) {
+    var mode = (typeof simMode !== 'undefined') ? simMode : 'auto';
+    ['s', 'n', 'e', 'w'].forEach(function (a) {
+      var cars = lanes[a].slice().sort(function (p, q) { return p.pos - q.pos; });   // ascending : cars[0] is the front-most
+      var light = state[a];
+      var mustStop = (mode !== 'emergency') && (light !== 'green');
+      var vmax = (mode === 'emergency') ? 2.2 : VMAX;
+      cars.forEach(function (c, idx) {
+        var limit = -Infinity;
+        if (idx > 0) limit = Math.max(limit, cars[idx - 1].pos + GAP);
+        if (mustStop && c.pos >= HOLD - 0.05) limit = Math.max(limit, HOLD);
+        var target = Math.max(0, Math.min(vmax, (c.pos - limit) * 2.5));
+        c.v += (target - c.v) * Math.min(1, dt * 6);
+        c.pos -= c.v * dt;
+        if (limit > -Infinity && c.pos < limit && c.pos > limit - 1) c.pos = limit;
+      });
+      var maxPos = Math.max.apply(null, cars.map(function (c) { return c.pos; }));
+      cars.forEach(function (c) {
+        if (c.pos < -13.5) { c.pos = Math.max(13, maxPos + 4.8); maxPos = c.pos; c.v = 1; }
+        var p = carPos(a, c.pos);
+        c.mesh.position.set(p[0], 0.16, p[1]);
+        c.mesh.rotation.y = HEAD[a];
+      });
+    });
+  }
+
+  // ---------- camera orbit ----------
+  var cam = { theta: 0.75, phi: 0.95, r: 34 };
+  var CAM0 = { theta: 0.75, phi: 0.95, r: 34 }, TOP = { theta: 0, phi: 0.01, r: 38 };
+  var camTarget = { theta: cam.theta, phi: cam.phi, r: cam.r };
+  function applyCam() {
+    cam.theta += (camTarget.theta - cam.theta) * 0.18;
+    cam.phi += (camTarget.phi - cam.phi) * 0.18;
+    cam.r += (camTarget.r - cam.r) * 0.18;
+    camera.position.set(
+      cam.r * Math.sin(cam.phi) * Math.sin(cam.theta),
+      cam.r * Math.cos(cam.phi),
+      cam.r * Math.sin(cam.phi) * Math.cos(cam.theta));
+    camera.lookAt(0, 0, 0);
+  }
+  var drag = null;
+  canvas.addEventListener('pointerdown', function (e) { drag = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); canvas.style.cursor = 'grabbing'; });
+  canvas.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    camTarget.theta -= (e.clientX - drag.x) * 0.008;
+    camTarget.phi = Math.min(1.4, Math.max(0.01, camTarget.phi - (e.clientY - drag.y) * 0.006));
+    drag.x = e.clientX; drag.y = e.clientY;
+  });
+  function endDrag() { drag = null; canvas.style.cursor = 'grab'; }
+  canvas.addEventListener('pointerup', endDrag); canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('wheel', function (e) { e.preventDefault(); camTarget.r = Math.min(55, Math.max(14, camTarget.r + e.deltaY * 0.02)); }, { passive: false });
+  var bR = document.getElementById('sim3d-reset'), bT = document.getElementById('sim3d-top');
+  if (bR) bR.onclick = function () { camTarget.theta = CAM0.theta; camTarget.phi = CAM0.phi; camTarget.r = CAM0.r; };
+  if (bT) bT.onclick = function () { camTarget.theta = TOP.theta; camTarget.phi = TOP.phi; camTarget.r = TOP.r; };
+
+  // ---------- resize ----------
+  var W = 0, H = 0;
+  function resize() {
+    var w = wrap.clientWidth, h = wrap.clientHeight;
+    if (!w || !h || (w === W && h === H)) return;
+    W = w; H = h; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  if (window.ResizeObserver) new ResizeObserver(resize).observe(wrap);
+  window.addEventListener('resize', resize);
+
+  // ---------- main loop ----------
+  var clock = new THREE.Clock();
+  function frame() {
+    requestAnimationFrame(frame);
+    var dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+    if (!wrap.clientWidth) return;           // tab hidden
+    resize();
+    var mode = (typeof simMode !== 'undefined') ? simMode : 'auto';
+    var blinkOn = (mode !== 'emergency') || (Math.floor(t * 2) % 2 === 0);
+    ['n', 's', 'e', 'w'].forEach(function (d) {
+      ['red', 'yellow', 'green'].forEach(function (c) {
+        var L = lamps[d][c], on = state[d] === c && blinkOn;
+        L.mat.emissiveIntensity += ((on ? 2.4 : 0) - L.mat.emissiveIntensity) * 0.35;
+        L.mat.color.setHex(on ? COLORS[c].on : COLORS[c].off);
+        L.glow.material.opacity += ((on ? 0.9 : 0) - L.glow.material.opacity) * 0.35;
+      });
+    });
+    stepCars(dt);
+    applyCam();
+    renderer.render(scene, camera);
+  }
+  resize(); frame();
+
+  // ---------- API used by the PLC logic ----------
+  window.sim3d = {
+    reset: function () { state.n = state.s = state.e = state.w = null; },
+    set: function (dir, color) { state[dir] = color; }
+  };
+})();
+
+  </script>
+
+  <script>
+    // Tab Switch Logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-sky-400', 'bg-sky-500/10', 'border', 'border-sky-500/30');
+        btn.classList.add('text-slate-400');
+      });
+
+      const activeTab = document.getElementById('tab-' + tabId);
+      if(activeTab) activeTab.classList.remove('hidden');
+
+      const activeNav = document.getElementById('nav-' + tabId);
+      if(activeNav) {
+        activeNav.classList.remove('text-slate-400');
+        activeNav.classList.add('text-sky-400', 'bg-sky-500/10', 'border', 'border-sky-500/30');
+      }
+
+      ['projects', 'cover-letter'].forEach(id => {
+        const mNav = document.getElementById('m-nav-' + id);
+        if(mNav) {
+          if(id === tabId) {
+            mNav.className = "flex-1 min-w-[120px] py-2.5 text-center font-medium text-sky-400 border-b-2 border-sky-400";
+          } else {
+            mNav.className = "flex-1 min-w-[120px] py-2.5 text-center font-medium text-slate-400";
+          }
+        }
+      });
+    }
+
+    // Toast Notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast-msg');
+      document.getElementById('toast-text').innerText = msg;
+      toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+
+    // Copy Cover Letter
+    function copyCoverLetterText() {
+      const text = `
+[자기소개서 - 강대한]
+
+1. 지원 동기 및 포부
+10년간 롤(LoL) 전문 유튜버로 활동하며 급변하는 미디어 환경 속에서 콘텐츠를 기획하고 소통해 왔습니다. 대체 불가능한 확실한 기술 전문성을 갖추고자 인천폴리텍대학교 전기공학과 하이테크 과정에 입학하여 전기 제어반 배선 및 PLC 시퀀스, AI 활용 아두이노 임베디드, 방폭공학을 습득하였습니다. 현장의 안전을 책임지는 최고의 방폭 전기 엔지니어로 성장하겠습니다.
+
+2. 직무 관련 핵심 역량 및 실습 성과
+- 도면 해석 및 제어반 배선 시공 능력 (직각 배선 및 노이즈 방지)
+- PE관, CD관 배관 공사 오차 ±2mm 이내 정밀 시공
+- LS PLC 기반 4거리 교차로 신호등 시뮬레이션 시스템 제작 및 인터록 회로 적용
+- AI(ChatGPT/Gemini) 프롬프팅 활용 아두이노(UNO) 기초 전자기학 실증 (옴의 법칙, 저항 분배, PWM, 풀업/풀다운)
+
+3. 핵심 강점 (STAR)
+10년 간의 1인 크리에이터 경험을 통해 단단해진 문제 해결 능력, 몰입도, 그리고 오배선 0건을 달성해 내는 집념과 책임감.
+
+4. 학력 및 교육
+- 2026.03 ~ 현재: 인천폴리텍대학교 전기공학과 하이테크 과정
+- 2026.11.27 (예정): 전기기능사 실기 응시
+- 2026.12.04 (예정): 전기공사산업기사 과정평가형 작업형 응시 (필기형 12.03)
+- 2016 ~ 2026: 콘텐츠 크리에이터 (10년 활동)
+      `.trim();
+
+      const el = document.createElement('textarea');
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+
+      showToast('자기소개서 전문이 클립보드에 복사되었습니다.');
+    }
+
+    // ==========================================
+    // ARDUINO SIMULATOR LOGIC
+    // ==========================================
+    let ardAudioCtx = null;
+
+    function logArduinoSerial(msg) {
+      const serial = document.getElementById('ard-serial-log');
+      if(serial) {
+        serial.innerHTML += `<br>> ${msg}`;
+        serial.scrollTop = serial.scrollHeight;
+      }
+    }
+
+    function resetArduinoLEDs() {
+      const leds = ['red', 'cyan', 'green', 'blue', 'yellow'];
+      leds.forEach(c => {
+        const el = document.getElementById(`ard-led-${c}`);
+        if(el) el.className = "w-6 h-6 rounded-full bg-slate-800 border border-slate-700 transition-all duration-200";
+      });
+    }
+
+    function setArduinoLED(color, on) {
+      const el = document.getElementById(`ard-led-${color}`);
+      if(!el) return;
+      if(on) {
+        let glow = "bg-rose-500 glow-red";
+        if(color === 'cyan') glow = "bg-sky-400 glow-accent";
+        if(color === 'green') glow = "bg-emerald-400 glow-green";
+        if(color === 'blue') glow = "bg-blue-500 glow-accent";
+        if(color === 'yellow') glow = "bg-amber-400 glow-amber";
+        el.className = `w-6 h-6 rounded-full ${glow} border border-white transition-all duration-200`;
+      } else {
+        el.className = "w-6 h-6 rounded-full bg-slate-800 border border-slate-700 transition-all duration-200";
+      }
+    }
+
+    function playBuzzerTone(freq, duration) {
+      try {
+        if(!ardAudioCtx) ardAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if(ardAudioCtx.state === 'suspended') ardAudioCtx.resume();
+        const osc = ardAudioCtx.createOscillator();
+        const gain = ardAudioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, ardAudioCtx.currentTime);
+        gain.gain.setValueAtTime(0.05, ardAudioCtx.currentTime);
+        osc.connect(gain);
+        gain.connect(ardAudioCtx.destination);
+        osc.start();
+        osc.stop(ardAudioCtx.currentTime + (duration / 1000));
+      } catch(e){}
+
+      const bText = document.getElementById('ard-buzzer-text');
+      const bIcon = document.getElementById('ard-buzzer-icon');
+      if(bText) bText.innerText = `PWM Output (${freq}Hz)`;
+      if(bIcon) bIcon.className = "w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg border border-amber-500/30 animate-pulse";
+
+      setTimeout(() => {
+        if(bText) bText.innerText = "Mute (0Hz)";
+        if(bIcon) bIcon.className = "w-10 h-10 rounded-full bg-slate-800 text-slate-600 flex items-center justify-center text-lg";
+      }, duration);
+    }
+
+    function pressArduinoButton(isPressed) {
+      const btnText = document.getElementById('ard-button-text');
+      if(isPressed) {
+        if(btnText) btnText.innerText = "LOW (GND Pressed)";
+        logArduinoSerial("DigitalRead(D7) -> LOW (Button Pressed)");
+        setArduinoLED('red', true);
+        setArduinoLED('yellow', true);
+        playBuzzerTone(880, 150);
+      } else {
+        if(btnText) btnText.innerText = "HIGH (Unpressed)";
+        resetArduinoLEDs();
+      }
+    }
+
+    function triggerArdPattern(pattern) {
+      resetArduinoLEDs();
+      
+      if(pattern === 'seq') {
+        logArduinoSerial("Executing C++ Loop: LED Sequential Blink");
+        const seq = ['red', 'cyan', 'green', 'blue', 'yellow'];
+        seq.forEach((c, idx) => {
+          setTimeout(() => {
+            resetArduinoLEDs();
+            setArduinoLED(c, true);
+            logArduinoSerial(`DigitalWrite(Pin ${idx+2}, HIGH)`);
+            playBuzzerTone(400 + idx*150, 100);
+          }, idx * 250);
+        });
+        setTimeout(() => resetArduinoLEDs(), seq.length * 250 + 200);
+      } 
+      else if(pattern === 'melody') {
+        logArduinoSerial("Executing tone() PWM Melodic Scale");
+        const notes = [262, 294, 330, 349, 392, 440, 494, 523];
+        notes.forEach((f, i) => {
+          setTimeout(() => {
+            playBuzzerTone(f, 150);
+            logArduinoSerial(`tone(8, ${f}Hz)`);
+          }, i * 180);
+        });
+      }
+      else if(pattern === 'all') {
+        logArduinoSerial("Executing FULL LOAD Test (All Pins HIGH)");
+        ['red', 'cyan', 'green', 'blue', 'yellow'].forEach(c => setArduinoLED(c, true));
+        playBuzzerTone(1000, 500);
+        setTimeout(() => resetArduinoLEDs(), 1000);
+      }
+    }
+
+    // ==========================================
+    // PLC TRAFFIC LIGHT SIMULATOR LOGIC
+    // ==========================================
+    let simMode = 'auto'; // 'auto', 'pedestrian', 'emergency'
+    let currentPhase = 0; // 0: NS Green, 1: NS Yellow, 2: EW Green, 3: EW Yellow
+    let countdown = 5;
+    let simInterval = null;
+
+    function resetAllLights() {
+      if (window.sim3d) window.sim3d.reset();
+      ['n', 's', 'e', 'w'].forEach(dir => {
+        ['red', 'yellow', 'green'].forEach(color => {
+          const el = document.getElementById(`light-${dir}-${color}`);
+          if (el) {
+            el.className = "w-4 h-4 rounded-full bg-slate-800 border border-slate-700 transition-all duration-200";
+          }
+        });
+      });
+    }
+
+    function setLight(dir, color) {
+      if (window.sim3d) window.sim3d.set(dir, color);
+      const el = document.getElementById(`light-${dir}-${color}`);
+      if (!el) return;
+      if (color === 'red') {
+        el.className = "w-4 h-4 rounded-full bg-rose-500 glow-red signal-active border border-white transition-all duration-200";
+      } else if (color === 'yellow') {
+        el.className = "w-4 h-4 rounded-full bg-amber-400 glow-amber signal-active border border-white transition-all duration-200";
+      } else if (color === 'green') {
+        el.className = "w-4 h-4 rounded-full bg-emerald-400 glow-green signal-active border border-white transition-all duration-200";
+      }
+    }
+
+    function runSimulationTick() {
+      if (simMode === 'auto') {
+        countdown--;
+        if (countdown <= 0) {
+          currentPhase = (currentPhase + 1) % 4;
+          countdown = (currentPhase % 2 === 0) ? 5 : 2; // Green 5s, Yellow 2s
+        }
+      } else if (simMode === 'pedestrian') {
+        countdown--;
+        if (countdown <= 0) {
+          simMode = 'auto';
+          currentPhase = 0;
+          countdown = 5;
+        }
+      }
+      updateSimulationUI();
+    }
+
+    function setSimMode(mode) {
+      simMode = mode;
+      if (mode === 'auto') {
+        currentPhase = 0;
+        countdown = 5;
+      } else if (mode === 'pedestrian') {
+        countdown = 5;
+      }
+      updateSimulationUI();
+    }
+
+    function updateSimulationUI() {
+      resetAllLights();
+      const phaseText = document.getElementById('current-phase-text');
+      const timerText = document.getElementById('timer-countdown');
+
+      if (simMode === 'emergency') {
+        if (phaseText) {
+          phaseText.innerText = "비상 황색 점멸 중";
+          phaseText.className = "text-sm font-extrabold text-amber-400 animate-pulse";
+        }
+        if (timerText) timerText.innerText = "ALERT";
+        setLight('n', 'yellow');
+        setLight('s', 'yellow');
+        setLight('e', 'yellow');
+        setLight('w', 'yellow');
+        return;
+      }
+
+      if (simMode === 'pedestrian') {
+        if (phaseText) {
+          phaseText.innerText = "전 방향 적색 (보행자 전용)";
+          phaseText.className = "text-sm font-extrabold text-sky-400";
+        }
+        if (timerText) timerText.innerText = `0${countdown}s`;
+        setLight('n', 'red');
+        setLight('s', 'red');
+        setLight('e', 'red');
+        setLight('w', 'red');
+        return;
+      }
+
+      // Auto Sequence
+      if (timerText) timerText.innerText = `0${countdown}s`;
+      if (currentPhase === 0) {
+        // NS Green, EW Red
+        if (phaseText) {
+          phaseText.innerText = "남북(N-S) 직진 신호";
+          phaseText.className = "text-sm font-extrabold text-emerald-400";
+        }
+        setLight('n', 'green');
+        setLight('s', 'green');
+        setLight('e', 'red');
+        setLight('w', 'red');
+      } else if (currentPhase === 1) {
+        // NS Yellow, EW Red
+        if (phaseText) {
+          phaseText.innerText = "남북(N-S) 황색 주의";
+          phaseText.className = "text-sm font-extrabold text-amber-400";
+        }
+        setLight('n', 'yellow');
+        setLight('s', 'yellow');
+        setLight('e', 'red');
+        setLight('w', 'red');
+      } else if (currentPhase === 2) {
+        // EW Green, NS Red
+        if (phaseText) {
+          phaseText.innerText = "동서(E-W) 직진 신호";
+          phaseText.className = "text-sm font-extrabold text-emerald-400";
+        }
+        setLight('e', 'green');
+        setLight('w', 'green');
+        setLight('n', 'red');
+        setLight('s', 'red');
+      } else if (currentPhase === 3) {
+        // EW Yellow, NS Red
+        if (phaseText) {
+          phaseText.innerText = "동서(E-W) 황색 주의";
+          phaseText.className = "text-sm font-extrabold text-amber-400";
+        }
+        setLight('e', 'yellow');
+        setLight('w', 'yellow');
+        setLight('n', 'red');
+        setLight('s', 'red');
+      }
+    }
+
+    // Start Simulation Loop on Load
+    window.onload = function() {
+      simInterval = setInterval(runSimulationTick, 1000);
+      updateSimulationUI();
+    };
+  </script>
+</body>
+</html>
